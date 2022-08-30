@@ -1,0 +1,888 @@
+var: 
+	- hoisted (always declared at top of scope, global if none)
+    - function scope
+let:
+    - block scope
+    - not redeclarable
+const: 
+    - block scope
+    - not reassignable
+    - not redeclarable
+
+  var:
+    -can be declared outside any function to be used inside any function
+    -can be declared inside any function or any other {} which are of only if or if-else or switch etc.
+     and can be used anywhere inside the function
+    -can be changed again and again anywhere
+  let:
+    -can be declared outside any function to be used inside any function
+    -if declared inside any function or any other {} which are of only if or if-else or switch etc.
+     and can't be used anywhere inside the function and can be only used inside statement
+    - can be changed again and again only inside the statement in which they are made in
+  const:
+    -can be declared outside any function to be used inside any function
+    -can be declared inside any function or any other {} which are of only if or if-else or switch etc.
+    
+ and can be used anywhere inside the function
+    -cannot be changed again and agan anywhere, if tried to, will result in an error
+
+
+//different data types in java script
+8 types of datatypes 
+true, false						// 1. Boolean
+null 							// 2. Null
+undefined 						// 3. Undefined
+1, 4, 7, 231, 51, 11, 9			// 4. Number
+9007199254740991n				// 5. BigInt
+'Hello', 'World', 'Uzbekistan'	// 6. String
+let sym1 = Symbol()				// 7. Symbol
+{a: 123}, [1]					// 8. Objects
+
+3.differnce between == and=== operators
+= operator in javascript is called as assign operator. It is used to assign
+value to a variable, it is used as: 
+variable = "value"
+
+== operator in javascript is called the equals operator. It is used to compare
+equals between two values, ignoring their types(number, string, boolean, etc.),
+it is used as: 
+   (5 == "5") // true
+
+=== operator in javascript is called the strict equals operator. It is used to
+compare euals between two values, considering their types(number, string,
+boolean, etc.), it is used as
+   (5 === "5") // false
+
+NaN is short for "Not-a-Number". 
+example
+const bird = "Parrot"
+const colour = "green"
+const total = bird + colour
+console.log(total)
+//NaN = Not a number.
+ a property of the global object
+
+5.immediately invoked function in java script ? 
+sol..  a JavaScript function that runs as soon as it is defined.
+(function () {
+  console.log('Awesome');
+}());
+
+6.explain pass by value and pass by refrence?
+
+* Pass By Value:
+->It is apply to premitive types(string,int,char)
+->In Pass by value, parameters passed as an arguments create its own copy.
+So any changes made inside the function is made to the copied value not to 
+the original value .
+ 
+let a=5;
+b=a;
+b=a+5;
+console.log(a) //output: 5
+console.log(b) //output: 10
+
+* Pass By Reference :
+->  It is apply on no-premitives data type(array) 
+->  In JavaScript array and Object follows pass by reference property.
+->  In Pass by reference, parameters passed as an arguments does not 
+    create its own copy, it refers to the original value so changes
+    made inside function affect the original value. 
+
+const obj1 = {name:"abc",age:23};
+const obj2 = obj1;
+obj2.name="xyz";
+
+console.log(obj2.name) //output: xyz
+console.log(obj1.name) //output: xyz
+
+7.Expalin scope and scope chain in javascript?
+Scope in JavaScript refers to the accessibility or visibility of variables.
+ That is, which parts of a program have access to the variable or where the variable is visible.
+
+
+
+
+8.recursion in javascript?
+A function that calls itself is called a recursive function
+function test(n){
+    if(n>0){
+        console.log(n)
+        test(n-1)
+    }
+}
+test(10)
+
+9.Polyfill
+A polyfill is a piece of code used to provide modern functionality on older browsers that do not natively support it.
+
+10.Explain closures in javascript?
+
+A closure gives you access to an outer function’s scope from an inner function
+-->closure in javascript
+//closure is the combination of function and the lexical enviornment in
+//which the function is defined.closure give you access to the functions
+//and variables outside the function.
+function outer(){
+  const outerData ="outer";
+  function inner(){
+    const innerData="inner";
+    console.log(`${outerData} and{innerData}`);
+  }
+  inner();
+}
+outer();
+10.Explain this keyword?
+// this keyword
+
+// This keyword belongs to the object it belongs to
+// (1).Alone, this refers to the global object.
+// (2).In a regular function,this refers to the global object.
+// (3).In a method, this refers to the owner object.
+
+// 1
+console.log(this);
+
+// 2
+function abc() {
+  console.log(this);
+}
+abc();
+
+// 3
+const obj = {
+  name: "Abhishek",
+  no: 1,
+  sum: function (a, b) {
+    console.log("hello sum", a + b);
+    console.log("this:::", this);
+    console.log("this name:::", this.name);
+  },
+};
+
+obj.sum(4, 3)
+11.Explain call(),apply()and bind()methods.
+Call invokes the function and allows you to pass in arguments one by one.
+Apply invokes the function and allows you to pass in arguments as an array.
+Bind returns a new function, allowing you to pass in a this array and any number of arguments.
+
+Apply vs. Call vs. Bind Examples
+--------------
+Call
+
+var person1 = {firstName: 'Jon', lastName: 'Kuperman'};
+var person2 = {firstName: 'Kelly', lastName: 'King'};
+
+function say(greeting) {
+    console.log(greeting + ' ' + this.firstName + ' ' + this.lastName);
+}
+
+say.call(person1, 'Hello'); // Hello Jon Kuperman
+say.call(person2, 'Hello'); // Hello Kelly King
+
+--------------
+Apply
+
+var person1 = {firstName: 'Jon', lastName: 'Kuperman'};
+var person2 = {firstName: 'Kelly', lastName: 'King'};
+
+function say(greeting) {
+    console.log(greeting + ' ' + this.firstName + ' ' + this.lastName);
+}
+
+say.apply(person1, ['Hello']); // Hello Jon Kuperman
+say.apply(person2, ['Hello']); // Hello Kelly King
+
+-------------
+Bind
+
+var person1 = {firstName: 'Sanjay', lastName: 'Parmar'};
+var person2 = {firstName: 'Prachi', lastName: 'Rajput'};
+
+function say() {
+    console.log('Hello ' + this.firstName + ' ' + this.lastName);
+}
+
+var sayHelloJon = say.bind(person1);
+var sayHelloKelly = say.bind(person2);
+
+sayHelloJon(); // Hello Sanjay Parmar
+sayHelloKelly(); // Hello Prachi Parmar
+
+12. Explain rest &spread operator
+13.Explain higher order functions?
+A “higher-order function” is a function that accepts functions as parameters and/or returns a function.
+
+    Array Method .reduce() 
+    Array Method .forEach() 
+    Array Method .filter() 
+    Array Method .map()
+14.Destructuring?
+ Destructuring allows us to extract multiple properties, or items, from an array​ at a time.
+
+let obj = {name: 'Max', age: 22, address: 'Delhi'};
+const {name, age} = obj;
+
+console.log(name);
+//expected output: "Max"
+
+console.log(age);
+//expected output: 22
+
+console.log(address);
+//expected output: Uncaught ReferenceError: address is not defined
+
+// simple example with array-------------------------------
+let a, b, rest;
+[a, b] = [10, 20];
+
+console.log(a);
+// expected output: 10
+
+console.log(b);
+// expected output: 20
+
+[a, b, ...rest] = [10, 20, 30, 40, 50];
+
+console.log(rest);
+// expected output: Array [30,40,50]
+
+ 15.ARROW FUNCTION ?
+Arrow functions allow us to write shorter function syntax:
+
+16.what is memorization ?
+When a function is given in input, it performs the necessary computation and saves the result in a cache before returning the value. 
+If the same input is received again in the future, it will not be necessary to repeat the process.
+ It would simply return the cached answer from the memory.
+
+17.what are object prototypes ?
+objects inherit properties and methods from a prototype.
+
+18.what is currying in js?
+the 
+function of multiple arguments into several functions of a single 
+argument in sequence. It is also called nested function is ecmascript
+
+//Without currying
+function calculateVolume(length, breadth, height) {
+        return length * breadth * height;
+    }
+//With Currying
+function calculateVolume(length) {
+        return function (breadth) {
+            return function (height) {
+                return length * breadth * height;
+            }
+        }
+    }
+19.What are callbacks ?
+A callback is a function passed as an argument to another function
+
+This technique allows a function to call another function
+
+A callback function can run after another function has finished
+
+function greet(name) {
+    console.log('Hi' + ' ' + name);
+}
+
+greet('Peter'); // Hi Peter
+
+20.what is the use of constructor function in js ?
+1. A constructor is a function that creates an instance of a class which is typically called an “object”.
+
+// 2. In JavaScript, a constructor gets
+// called when you declare an object using the new keyword.
+
+// 3. The purpose of a constructor is to create an object and 
+// set values if there are any object properties present.
+
+function Person(first, last, age, eye) {
+  this.firstName = first;
+  this.lastName = last;
+  this.age = age;
+}
+
+// Create a Person object
+const myFather = new Person("John", "Doe", 50);
+console.log(myFather)
+
+
+
+//basic program to print and perform basic operations
+var num = 45
+console.log("My First NodeJS Program !")
+console.log("Good Evening !")
+
+console.log(num)
+console.log(num+10)
+console.log(num-10)
+console.log(num*10)
+console.log(num/10)
+console.log(num%10)
+
+
+
+
+function fun1()
+{
+    var num = 45
+    console.log("My First NodeJS Program !")
+    console.log("Good Evening !")
+    console.log(num)
+    console.log(num+10)
+    console.log(num-10)
+    console.log(num*10)
+    console.log(num/10)
+    console.log(num%10)
+}
+
+fun1()
+fun1()
+
+
+/*FUNCTION 
+    1. Arguments Receive
+    2. Process  (Mandatory)
+    3. Value Return
+*/
+
+// No Argument , No Return
+function fun1()
+{
+    console.log("Good Morning !")
+}
+
+// Arguments , No Return
+function addition(a,b)
+{
+    var c = a + b
+    console.log(c)
+}
+
+// Argument / Return
+function multiply(a,b)
+{
+    var c = a * b    
+    return c;
+}
+
+fun1()
+addition(45,23)
+var a = multiply(25,5)
+
+var z = a / 10
+console.log(z)
+
+wheat>>chaki>>aata---process and return
+wheat>>bhandra --process but no return
+//function also work same as variable there is no difference in num &fun1()
+only difference is that fun1() represent function and num represent number
+num()is not callable
+fun1() is callable
+
+function fun1()
+{
+    console.log("Good Evening !")
+    console.log("Hello Everyone !")
+}
+
+var num = 23
+//console.log(typeof num)//typeof show which type of variable
+
+console.log(typeof fun1)
+
+fun1()
+//num()
+
+function fun1()
+{
+    console.log("Good Evening !")
+    console.log("Hello Everyone !")
+}
+
+var num = 23
+
+var abc = fun1
+abc()
+
+
+
+
+
+function hello(ob)
+{
+   console.log("Hello Everyone !")
+   ob()
+}
+
+function fun1()
+{
+    console.log("Good Evening !")    
+}
+
+
+hello(fun1)
+
+
+
+
+
+
+function hello(ob)
+{
+    ob("Good Morning !")
+    ob("CodeBetter Indore !")
+}
+
+hello(console.log)
+
+function hello()
+{
+    console.log("Hello ..... ")
+    function fun1()
+    {
+        console.log("Good Evening !")
+    }
+    return fun1
+}
+
+var z = hello()
+
+z()
+z()
+z()
+z()
+
+
+function hello()
+
+{
+    console.log("Hello ..... ")
+    function fun1()
+    {
+        console.log("Good Evening !")
+    }
+    return fun1
+}
+
+hello()()
+
+
+
+function add(a,b)
+{
+    var c = a + b
+    console.log("Add : " , c)
+}
+function mul(a,b)
+{
+    var c = a * b
+    console.log("Mul : " , c)
+}
+function hello(a,b,operation)
+{
+    console.log("Good Evening Students !")
+    if(operation==1)
+        add(a,b)
+    if(operation==2)    
+        mul(a,b)
+    console.log("CodeBetter Indore !")
+}
+
+hello(12,12,2) // add:1 , mul:2
+
+
+
+function add(a,b)
+{
+    var c = a + b
+    console.log("Add : " , c)
+}
+function mul(a,b)
+{
+    var c = a * b
+    console.log("Mul : " , c)
+}
+function sub(a,b)
+{
+    var c = a - b
+    console.log("Sub : " , c)
+}
+
+function hello(a,b,operation)
+{
+    console.log("Good Evening Students !")
+    operation(a,b)
+    console.log("CodeBetter Indore !")
+}
+
+hello(23,12,sub) 
+
+
+function add(a,b)
+{
+    var c = a + b
+    console.log("Add : " , c)
+}
+
+function hello(a,b,operation)
+{
+    console.log("Good Evening Students !")
+    operation(a,b)
+    console.log("CodeBetter Indore !")
+}
+
+hello(23,12,add) 
+
+// Annonymous Function---are function without names,  function that is not stored in a program file,accepts multiple input and return one output.
+single time execution
+hello(45,10,function(a,b){
+    var c = a * b
+    console.log(c)
+})
+
+
+var x = 200; // Global Variable
+var a = 500;
+
+function fun1()
+{
+    var a = 100; // Local Variable
+    let b = 45;
+    console.log("A : ", a , " B : " , b);    
+    console.log("X : ",x);
+
+    {
+        var a = 600;
+        let b = 12;
+        console.log("Inside Block A : ",a," B : ",b);
+    }
+
+    console.log("A : ", a , " B : " , b);    
+}
+
+fun1()
+console.log(x)
+let---is block scoped.
+not allow to redeclare variables
+var ---is function scoped.
+allows to redeclare variables
+
+
+// Hoisting
+
+console.log(num)
+
+const num = 45
+
+<!--
+    A closure is a function which has access to the variable 
+    from another function's scope. 
+    This is accomplished by creating a function inside a function. 
+    Of course, the outer function does not have access to the inner 
+    scope.
+-->
+<script>
+    // Closure
+    function fun1()
+    {
+        var x = 100;
+        function fun2()
+        {
+            var y = 25
+            var z = x + y;
+            console.log(z)
+        }
+        return fun2;
+    }
+
+    var abc = fun1()
+
+    abc()
+
+</script>
+
+function fun1()
+{
+    console.log("Codebetter Indore !")
+}
+
+setTimeout(fun1,5000) // 5Second
+
+function fun1()
+{
+    console.log("Codebetter Indore !")
+}
+
+var obj = setTimeout(fun1,10000)
+
+// console.log(obj)
+
+setTimeout(()=>{
+    clearTimeout(obj)
+},15000)
+
+function fun1()
+{
+    console.log("Codebetter Indore !")
+}
+
+setInterval(fun1,2000)
+
+function fun1()
+{
+    console.log("Codebetter Indore !")
+}
+
+var obj = setInterval(fun1,2000)
+
+setTimeout(()=>{
+    clearInterval(obj)
+},15000)
+
+Synchronous / Blocking
+
+Asynchronous / Unblocking
+
+************************************
+
+    1. Sunday : Home
+
+                    List : Items ---- Block
+                1. Friend Home 10min
+
+                    List : Items ---- Unblock
+                1. Friend Home 10min
+
+// Blocking
+function add(x,y)
+{
+    for(var i=1; i<979835834;i++){}
+    var c =  x + y
+    return c;
+}
+
+console.log("Program Start ...... ")
+
+var z = add(45,12)
+console.log(z)
+
+console.log("Thanks")
+console.log("Program End ...... ")
+// UnBlocking
+/*
+    A JavaScript callback is a function which is to be executed 
+    after another function has finished execution.
+    Any function that is passed as an argument to another function 
+    so that it can be executed in that other function 
+    is called as a callback function.
+*/
+function add(x,y,callback)
+{
+    for(var i=1; i<9798358934;i++){}
+    var c =  x + y
+    callback(c)
+}
+
+function getResult(data)
+{
+    console.log("Result : ", data)
+}
+
+console.log("Program Start ...... ")
+
+setTimeout(add,1,55,45,getResult)
+
+console.log("Thanks")
+console.log("Program End ...... ")
+
+function mul(x,y,callback)
+{
+    var z = x * y
+    if(z>100)
+        callback(z)
+    else
+        callback(25)    
+}
+function add(x,y,callback)
+{
+    var z = x + y
+    if(z>25)        
+        callback(z)
+    else
+        callback(0)    
+}
+
+var a = 2;
+var b = 5;
+
+var p = 10
+var q = 20
+
+add(a,b,(x)=>
+{
+    add(p,q,(y)=>
+    {
+          mul(x,y,(res)=>
+          {
+                console.log(res)            
+          })  
+    })
+})
+
+
+function mul(x,y)
+{
+    var promise = new Promise((resolve,reject)=>
+    {
+        var z = x * y
+        if(z>100)
+            resolve(z)
+        else
+            reject("Wrong Result !")
+    });    
+    return promise;  
+}
+function add(x,y)
+{
+    var promise = new Promise((resolve,reject)=>
+    {
+        var z = x + y
+        resolve(z)
+    })    
+    return promise;    
+}
+
+var a = 2;
+var b = 5;
+var p = 10
+var q = 20
+
+
+var p1 = add(a,b);
+p1.then(data=>
+{
+    console.log("Data : ",data)
+})
+p1.catch(error=>{
+    console.log("Error : ",error)
+})
+
+function mul(x,y)
+{
+    var promise = new Promise((resolve,reject)=>
+    {
+        var z = x * y
+        if(z>100)
+            resolve(z)
+        else
+            reject("Wrong Result !")
+    });    
+    return promise;  
+}
+function add(x,y)
+{
+    var promise = new Promise((resolve,reject)=>
+    {
+        var z = x + y
+        resolve(z)
+    })    
+    return promise;    
+}
+
+var a = 2;
+var b = 5;
+var p = 4
+var q = 1
+
+
+var p1 = add(a,b);
+p1.then(x=>
+{
+    var p2 = add(p,q)
+    p2.then(y=>
+    {
+        var p3 = mul(x,y)
+        p3.then(z=>{
+            console.log("Result : ",z)
+        }).catch(error=>{
+            console.log("Error : ",error)
+        })
+    })
+    p2.catch(error=>{
+        console.log("Error : ",error)
+    })
+})
+p1.catch(error=>{
+    console.log("Error : ",error)
+})
+
+
+function mul(x,y)
+{
+    var promise = new Promise((resolve,reject)=>
+    {
+        var z = x * y
+        if(z>100)
+            resolve(z)
+        else
+            reject("Wrong Result !")
+    });    
+    return promise;  
+}
+function add(x,y)
+{
+    var promise = new Promise((resolve,reject)=>
+    {
+        var z = x + y
+        resolve(z)
+    })    
+    return promise;    
+}
+
+var a = 2;
+var b = 12;
+var p = 4
+var q = 12
+
+
+add(a,b)
+.then(x=>add(p,q)
+        .then(y=>mul(x,y)
+                .then(res=>console.log("Result : ",res))
+                .catch(err=>console.log("Err : ",err)))
+        .catch(err=>console.log("Err : ",err)))
+.catch(err=>console.log("Err : ",err))
+
+
+function mul(x,y)
+{
+    var promise = new Promise((resolve,reject)=>
+    {
+        var z = x * y
+        if(z>100)
+            resolve(z)
+        else
+            reject("Wrong Result !")
+    });    
+    return promise;  
+}
+function add(x,y)
+{
+    var promise = new Promise((resolve,reject)=>
+    {
+        var z = x + y
+        resolve(z)
+    })    
+    return promise;    
+}
+
+var a = 2;
+var b = 12;
+var p = 4
+var q = 12
+
+add(a,b).then(x=>add(p,q).then(y=>mul(x,y).then(res=>console.log(res))))
+
+// async await
